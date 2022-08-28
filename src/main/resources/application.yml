@@ -1,0 +1,23 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    hikari:
+      leak-detection-threshold: 5000
+      maximum-pool-size: 20
+      max-lifetime: 900000
+    url: ${DB_URL:jdbc:postgresql://db:5432/coolplanet-postgres}
+    username: ${DB_USERNAME:coolplanet-postgres}
+    password: ${DB_PASSWORD:coolplanet-postgres}
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    properties:
+      hibernate:
+        show_sql: false

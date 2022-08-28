@@ -28,18 +28,19 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
 @Table(name = "TASK")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Task {
+public class Task extends DateEntity {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = SEQUENCE, generator = "TASK_ID")
-    @SequenceGenerator(name = "CAMPAIGN_ID", sequenceName = "ta_ID_SEQ", allocationSize = 1)
+    @Column(name = "ID", nullable = false)
+    @SequenceGenerator(name = "TASK_SEQ", sequenceName = "TASK_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "TASK_SEQ")
+    @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(name = "UID")
+    @Column(name = "UID", nullable = false)
     private String uid;
 
-    @Column(name = "EXECUTION_TIME")
+    @Column(name = "EXECUTION_TIME", nullable = false)
     private Long executionTime;
 
     @Transient
