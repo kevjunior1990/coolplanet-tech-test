@@ -17,9 +17,7 @@ services:
     restart: always
 
   app:
-    image: 'coolplanet-demo:latest'
-    build:
-      context: .
+    image: 'coolplanet/coolplanet-demo:latest'
     container_name: app
     ports:
       - 8080:8080
