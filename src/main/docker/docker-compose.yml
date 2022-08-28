@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=coolplanet-postgres
+      - POSTGRES_PASSWORD=coolplanet-postgres
+    networks:
+      - postgres-coolplanet-test-service-network
+    volumes:
+      - postgres-coolplanet-test-service-data:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    image: 'coolplanet-demo:latest'
+    build:
+      context: .
+    container_name: app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/coolplanet-postgres
+      - SPRING_DATASOURCE_USERNAME=coolplanet-postgres
+      - SPRING_DATASOURCE_PASSWORD=coolplanet-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - postgres-coolplanet-test-service-network
+    restart: always
+
+networks:
+  postgres-coolplanet-test-service-network:
+    driver: bridge
+
+volumes:
+  postgres-coolplanet-test-service-data:
+    driver: local

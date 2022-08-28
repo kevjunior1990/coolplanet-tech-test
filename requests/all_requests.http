@@ -1,0 +1,43 @@
+### 1. View all tasks stored
+### Get all tasks (TaskController)
+GET http://localhost:8080/api/v1/tasks
+Accept: application/json
+
+### 2. Calculate average task execution
+### Calculate average task execution uid (TaskController)
+GET http://localhost:8080/api/v1/task/TEST-TASK-03
+Accept: application/json
+
+### 3. Save Task with unique identifier and execution time (TaskController)
+POST http://localhost:8080/api/v1/tasks
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": "TEST-TASK-02",
+  "executionTime": 500
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
