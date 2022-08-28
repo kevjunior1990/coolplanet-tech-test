@@ -7,10 +7,12 @@ import com.example.coolplanetdemo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Service
+@Transactional
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
