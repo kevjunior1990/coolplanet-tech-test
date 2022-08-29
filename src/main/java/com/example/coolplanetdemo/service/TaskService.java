@@ -15,7 +15,7 @@ public interface TaskService {
 
     Task saveTask(Task task);
 
-    Task getCurrentAverageTime (String uid);
+    Task getCurrentAverageTime(String uid);
 
     default BigDecimal calculateCurrentAverageTime(BigDecimal totalExecutionTime, BigDecimal totalTasks) {
 
