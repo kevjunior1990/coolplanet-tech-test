@@ -1,6 +1,9 @@
 ### How to build project locally
-The below command will build and save the packaged jar file to the target folder. Once this is completed the docker image for the project will be built and pushed to local docker registry
-> ./mvnw clean package
+The below command will build and save the packaged jar file to the target folder. Once this is completed the docker image for the project will be built and pushed to local docker registry.
+
+> ./mvnw clean package -Ddocker-image.tag=latest -D skipTests
+
+I am skipping tests on main branch as I have with dependencies with flyway/docker when running tests locally. Please checkout  **unit-tests-branch** to see successful unit tests withouth those dependencies
 
 ### How to run the project
 A docker-compose file has been created at the root level of the project to deploy the pre-built coolplanet-demo docker image and postgres image 
