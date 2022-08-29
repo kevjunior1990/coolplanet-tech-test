@@ -8,8 +8,10 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -27,11 +29,18 @@ public class TaskServiceTest {
     private TaskRepository repository;
 
     @Test
-    public void test1() {
+    public void test() {
 
-        when(repository.findAllByUid("TEST_UID")).thenReturn(Collections.emptyList());
+        when(repository.findByUid("TASK_UID_01")).thenReturn(
+                Optional.of(
+                        Task.builder()
+                                .uid("TASK_UID_01")
+                                .currentAverageTime(BigDecimal.valueOf(100L))
+                                .build()
+                )
+        );
 
-        List<Task> result = service.getTasks();
+        Task result = service.getCurrentAverageTime("TASK_UID_01");
 
         assertThat(result, is(notNullValue()));
     }

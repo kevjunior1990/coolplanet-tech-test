@@ -19,4 +19,10 @@ public class ApiExceptionHandler {
       TaskSaveException exception) {
     return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(TaskNotFoundException.class)
+  public ResponseEntity<String> handleTaskNotFoundException(
+          TaskNotFoundException exception) {
+    return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+  }
 }

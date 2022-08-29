@@ -36,7 +36,20 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
+--
+-- Name: execution_time_seq; Type: SEQUENCE;
+--
 
+CREATE SEQUENCE execution_time_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 
 
@@ -47,8 +60,19 @@ SET default_table_access_method = heap;
 
 CREATE TABLE task (
     id bigint NOT NULL,
-    uid character varying(255) NOT NULL ,
-    execution_time numeric(19,2) NOT NULL ,
+    uid character varying(255) unique NOT NULL ,
+    creation_date timestamp without time zone NOT NULL,
+    modification_date timestamp without time zone
+);
+
+--
+-- Name: execution_time; Type: TABLE;
+--
+
+CREATE TABLE execution_time (
+    id bigint NOT NULL,
+    value numeric(19,2) NOT NULL ,
+    task_id bigint NOT NULL,
     creation_date timestamp without time zone NOT NULL,
     modification_date timestamp without time zone
 );
@@ -62,6 +86,13 @@ CREATE TABLE task (
 ALTER TABLE ONLY task
     ADD CONSTRAINT task_pkey PRIMARY KEY (id);
 
+
+--
+-- Name: execution_time execution__pkey; Type: CONSTRAINT;
+--
+
+ALTER TABLE ONLY execution_time
+    ADD CONSTRAINT execution_time_pkey PRIMARY KEY (id);
 
 --
 -- PostgreSQL database dump complete

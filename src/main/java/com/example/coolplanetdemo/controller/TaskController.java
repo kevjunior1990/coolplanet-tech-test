@@ -1,6 +1,7 @@
 package com.example.coolplanetdemo.controller;
 
 
+import com.example.coolplanetdemo.entity.ExecutionTime;
 import com.example.coolplanetdemo.entity.Task;
 import com.example.coolplanetdemo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class TaskController {
         return ResponseEntity.ok(service.getTasks());
     }
 
-    @PostMapping
-    public Task saveTask(@RequestBody Task task) {
+    @GetMapping("/execution-time")
+    public ResponseEntity<List<ExecutionTime>> getExecutionTimes() {
 
-        return service.saveTask(task);
+        return ResponseEntity.ok(service.getExecutionTimes());
     }
 
     @GetMapping("/{uid}/current-average-time")
@@ -39,5 +40,11 @@ public class TaskController {
         return ResponseEntity.ok(
                 service.getCurrentAverageTime(uid)
         );
+    }
+
+    @PostMapping
+    public Task saveTask(@RequestBody Task task) {
+
+        return service.saveTask(task);
     }
 }

@@ -3,9 +3,14 @@
 GET http://localhost:8080/api/v1/task
 Accept: application/json
 
+### 1. View all execution time stored (This call was created just for testing purposes, not requirement related)
+### Get all tasks (TaskController)
+GET http://localhost:8080/api/v1/task/execution-time
+Accept: application/json
+
 ### 2. Calculate average task execution
 ### Calculate average task execution uid (TaskController)
-GET http://localhost:8080/api/v1/task/TEST-TASK-03/current-average-time
+GET http://localhost:8080/api/v1/task/TEST-TASK-01/current-average-time
 Accept: application/json
 
 ### 3. Save Task with unique identifier and execution time (TaskController)
@@ -14,8 +19,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "uid": "TEST-TASK-03",
-  "executionTime": 500
+  "uid": "TEST-TASK-01",
+  "executionTime": 100
 }
 
 

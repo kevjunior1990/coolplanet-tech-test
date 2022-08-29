@@ -12,8 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,46 +29,6 @@ public class TaskRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        taskRepository.saveAll(
-                Arrays.asList(
-                        Task.builder()
-                                .uid("TEST_UID_1")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_1")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_1")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_2")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_2")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_3")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_4")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_5")
-                                .executionTime(100L)
-                                .build(),
-                        Task.builder()
-                                .uid("TEST_UID_6")
-                                .executionTime(100L)
-                                .build()
-                )
-        );
     }
 
     @AfterEach
@@ -74,14 +37,14 @@ public class TaskRepositoryTest {
     }
 
     @Test
-    public void testFindAllByUid() {
+    public void testFindByUid() {
 
-        List<Task> existingStats = taskRepository.findAllByUid("TEST_UID_1");
+        Optional<Task> existingTask = taskRepository.findByUid("TEST_UID_1");
 
-        List<Task> nonExistentStats = taskRepository.findAllByUid("TEST_UID_7");
+        Optional<Task> nonExistentTask = taskRepository.findByUid("TEST_UID_7");
 
-        assertThat(existingStats, is(notNullValue()));
+        assertThat(existingTask, is(not(equalTo(Optional.empty()))));
 
-        assertThat(nonExistentStats, is(Collections.emptyList()));
+        assertThat(nonExistentTask, is(equalTo(Optional.empty())));
     }
 }

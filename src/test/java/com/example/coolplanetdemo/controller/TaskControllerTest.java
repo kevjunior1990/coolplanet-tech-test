@@ -44,11 +44,11 @@ class TaskControllerTest {
 
         when(service.getCurrentAverageTime("TEST_TASK_O1")).thenReturn(task);
 
-        mockMvc.perform(get("/api/v1/task/TEST_TASK_01").contextPath("/api/v1")
+        mockMvc.perform(get("/api/v1/task/TEST_TASK_01/current-average-time")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.uid").value("TEST_TASK_O1"))
-                .andExpect(jsonPath("$.executionTime").value(100L));
+                .andExpect(jsonPath("$.currentAverageTime").value(100L));
 
         verify(service, times(1)).getCurrentAverageTime("TEST_TASK_O1");
     }
@@ -64,7 +64,7 @@ class TaskControllerTest {
         when(service.saveTask(task)).thenReturn(task);
 
 
-        mockMvc.perform(post("/api/v1/").contextPath("/api/v1")
+        mockMvc.perform(post("/api/v1/task")
                         .content(objectMapper.writeValueAsString(task))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())

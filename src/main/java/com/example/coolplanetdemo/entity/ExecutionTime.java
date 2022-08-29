@@ -12,10 +12,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -26,9 +26,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "TASK")
+@Table(name = "EXECUTION_TIME")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Task extends DateEntity {
+public class ExecutionTime {
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -37,12 +37,10 @@ public class Task extends DateEntity {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(name = "UID", nullable = false, unique = true)
-    private String uid;
+    @Column(name = "VALUE", nullable = false)
+    private Long value;
 
-    @Transient
-    private Long executionTime;
-
-    @Transient
-    private BigDecimal currentAverageTime;
+    @ManyToOne
+    @JoinColumn(name = "TASK_ID", nullable = false)
+    private Task task;
 }
