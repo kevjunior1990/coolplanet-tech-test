@@ -61,7 +61,7 @@ class TaskControllerTest {
                 .executionTime(100L)
                 .build();
 
-        when(service.saveTaskPerformed(task)).thenReturn(task);
+        when(service.saveTask(task)).thenReturn(task);
 
 
         mockMvc.perform(post("/api/v1/").contextPath("/api/v1")
@@ -70,6 +70,6 @@ class TaskControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.uid").value("TEST_TASK_01"));
 
-        verify(service, times(1)).saveTaskPerformed(task);
+        verify(service, times(1)).saveTask(task);
     }
 }

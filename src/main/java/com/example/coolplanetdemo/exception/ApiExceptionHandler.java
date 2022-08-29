@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-  @ExceptionHandler(TaskCalculateAverageException.class)
+  @ExceptionHandler(TaskCalculateCurrentAverageTimeException.class)
   public ResponseEntity<String> handleTaskCalculateAverageException(
-      TaskCalculateAverageException exception) {
-    return new ResponseEntity<>(exception.getMessage(), HttpStatus.FAILED_DEPENDENCY);
+      TaskCalculateCurrentAverageTimeException exception) {
+    return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(TaskSaveException.class)
   public ResponseEntity<String> handleTaskSaveException(
       TaskSaveException exception) {
-    return new ResponseEntity<>(exception.getMessage(), HttpStatus.FAILED_DEPENDENCY);
+    return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
   }
 }

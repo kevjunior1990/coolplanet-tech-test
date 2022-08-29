@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1", produces = "application/json")
+@RequestMapping(path = "/api/v1/task", produces = "application/json")
 public class TaskController {
 
     @Autowired
     private TaskService service;
 
-    @GetMapping("tasks")
+    @GetMapping
     public ResponseEntity<List<Task>> getTasks() {
 
         return ResponseEntity.ok(service.getTasks());
     }
 
-    @PostMapping("/tasks")
-    public Task addTask(@RequestBody Task task) {
+    @PostMapping
+    public Task saveTask(@RequestBody Task task) {
 
-        return service.saveTaskPerformed(task);
+        return service.saveTask(task);
     }
 
-    @GetMapping("/task/{uid}")
-    public ResponseEntity<Task> getCurrentTaskExecution(@PathVariable String uid) {
+    @GetMapping("/{uid}/current-average-time")
+    public ResponseEntity<Task> getCurrentAverageTime(@PathVariable String uid) {
 
         return ResponseEntity.ok(
                 service.getCurrentAverageTime(uid)

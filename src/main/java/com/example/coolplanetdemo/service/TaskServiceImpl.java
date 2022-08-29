@@ -1,7 +1,7 @@
 package com.example.coolplanetdemo.service;
 
 import com.example.coolplanetdemo.entity.Task;
-import com.example.coolplanetdemo.exception.TaskCalculateAverageException;
+import com.example.coolplanetdemo.exception.TaskCalculateCurrentAverageTimeException;
 import com.example.coolplanetdemo.exception.TaskSaveException;
 import com.example.coolplanetdemo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task saveTaskPerformed(Task task) {
+    public Task saveTask(Task task) {
 
         try {
 
@@ -66,7 +66,7 @@ public class TaskServiceImpl implements TaskService {
 
         } catch (Exception ex) {
 
-            throw new TaskCalculateAverageException(uid, ex.getMessage());
+            throw new TaskCalculateCurrentAverageTimeException(uid, ex.getMessage());
         }
     }
 }

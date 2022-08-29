@@ -9,7 +9,7 @@ import java.util.List;
 public interface TaskService {
 
     List<Task> getTasks();
-    Task saveTaskPerformed(Task task);
+    Task saveTask(Task task);
 
     Task getCurrentAverageTime (String uid);
 
