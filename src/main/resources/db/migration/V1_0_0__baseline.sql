@@ -94,6 +94,13 @@ ALTER TABLE ONLY task
 ALTER TABLE ONLY execution_time
     ADD CONSTRAINT execution_time_pkey PRIMARY KEY (id);
 
+
+--
+-- Name: execution_time fk_execution_time_task; Type: CONSTRAINT;
+--
+ALTER TABLE execution_time
+    ADD CONSTRAINT fk_execution_time_task FOREIGN KEY (task_id) REFERENCES task;
+
 --
 -- PostgreSQL database dump complete
 --
