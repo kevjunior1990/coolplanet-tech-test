@@ -1,0 +1,35 @@
+### Save Task with unique identifier and execution time (TaskController)
+POST http://localhost:8080/api/v1/task
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": "TEST-TASK-01",
+  "executionTime": 500
+}
+
+
+
+### Save Task with unique identifier and execution time (TaskController)
+POST http://localhost:8080/api/v1/task
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": "TEST-TASK-01",
+  "executionTime": 1000
+}
+
+### Save Task with unique identifier and execution time (TaskController)
+POST http://localhost:8080/api/v1/task
+Accept: application/json
+Content-Type: application/json
+
+{
+  "uid": "TEST-TASK-01",
+  "executionTime": 2000
+}
+
+### Calculate average task execution uid (TaskController) expected result (1166.67)
+GET http://localhost:8080/api/v1/task/TEST-TASK-01/current-average-time
+Accept: application/json
