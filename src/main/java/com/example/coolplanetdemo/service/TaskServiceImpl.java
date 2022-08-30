@@ -7,6 +7,7 @@ import com.example.coolplanetdemo.exception.TaskNotFoundException;
 import com.example.coolplanetdemo.exception.TaskSaveException;
 import com.example.coolplanetdemo.repository.ExecutionTimeRepository;
 import com.example.coolplanetdemo.repository.TaskRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
@@ -41,18 +43,24 @@ public class TaskServiceImpl implements TaskService {
 
         try {
 
-            Long executionTimeValue = task.getExecutionTime();
+            log.info("Attempting to save task with unique identifier: " + task.getUid());
 
             Task savedTask = taskRepository.findByUid(task.getUid())
                     .orElseGet(() -> taskRepository.save(task));
 
+            log.info("Task is saved");
+
+            log.info("Saving execution time for task with uid: " + task.getUid());
+
             ExecutionTime executionTime = ExecutionTime
                     .builder()
-                    .value(executionTimeValue)
+                    .value(task.getExecutionTime())
                     .task(savedTask)
                     .build();
 
             executionTimeRepository.save(executionTime);
+
+            log.info("Execution time saved for task with uid: " + task.getUid());
 
             return savedTask;
 
@@ -65,10 +73,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task getCurrentAverageTime(String uid) {
 
-        try {
+        log.info("Retrieving task with uid: " + uid);
 
-            Task task = taskRepository.findByUid(uid)
-                    .orElseThrow(() -> new TaskNotFoundException(uid));
+        Task task = taskRepository.findByUid(uid)
+                .orElseThrow(() -> new TaskNotFoundException(uid));
+
+        try {
 
             List<ExecutionTime> executionTimes = executionTimeRepository.findAllByTask(task);
 
