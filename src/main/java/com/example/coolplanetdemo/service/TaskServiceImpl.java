@@ -82,13 +82,13 @@ public class TaskServiceImpl implements TaskService {
 
             List<ExecutionTime> executionTimes = executionTimeRepository.findAllByTask(task);
 
-            BigDecimal totalCalculationTime = BigDecimal.valueOf(
+            BigDecimal totalExecutionTimeCalculated = BigDecimal.valueOf(
                     executionTimes.stream()
                             .mapToLong(ExecutionTime::getValue)
                             .sum()
             );
 
-            BigDecimal totalTaskCount = BigDecimal.valueOf(
+            BigDecimal totalExecutionTimesCount = BigDecimal.valueOf(
                     executionTimes.size()
             );
 
@@ -96,8 +96,8 @@ public class TaskServiceImpl implements TaskService {
                     .uid(uid)
                     .currentAverageTime(
                             calculateCurrentAverageTime(
-                                    totalCalculationTime,
-                                    totalTaskCount
+                                    totalExecutionTimeCalculated,
+                                    totalExecutionTimesCount
                             )
                     )
                     .build();
