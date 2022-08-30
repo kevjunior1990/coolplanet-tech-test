@@ -32,8 +32,8 @@ public class ExecutionTime {
 
     @Id
     @Column(name = "ID", nullable = false)
-    @SequenceGenerator(name = "TASK_SEQ", sequenceName = "TASK_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = SEQUENCE, generator = "TASK_SEQ")
+    @SequenceGenerator(name = "EXECUTION_TIME_SEQ", sequenceName = "EXECUTION_TIME_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "EXECUTION_TIME_SEQ")
     @EqualsAndHashCode.Include
     private Integer id;
 
